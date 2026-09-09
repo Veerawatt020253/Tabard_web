@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── สีหลัก: เขียว TaoBary ───────────────────────────────── */
+  --color-brand-50:  #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86efac;
+  --color-brand-400: #4ade80;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+  --color-brand-950: #052e16;
+
+  /* ── สีกลาง ─────────────────────────────────────────────── */
+  --color-ink:    #101a13;
+  --color-muted:  #667a6d;
+  --color-line:   #e6ebe7;
+  --color-canvas: #ffffff;
+  --color-surface:#f7faf8;
+
+  --font-sans: var(--font-app-sans), "IBM Plex Sans Thai", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xl:  0.875rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-card: 0 1px 2px rgba(16, 26, 19, 0.04), 0 8px 24px -12px rgba(16, 26, 19, 0.16);
+  --shadow-lift: 0 2px 4px rgba(16, 26, 19, 0.05), 0 18px 40px -16px rgba(16, 26, 19, 0.24);
+  --shadow-pill: 0 1px 2px rgba(16, 26, 19, 0.06), 0 6px 20px -8px rgba(16, 26, 19, 0.18);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: -0.006em;
+}
+
+/* โฟกัสแบบเห็นชัดแต่ไม่รบกวนสายตา */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-950);
+}
+
+/* ซ่อนสกรอลบาร์แนวนอนของแถบหมวดหมู่ */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+.animate-rise { animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
